@@ -19,14 +19,23 @@ module.exports = {
 		bullets.setAll('checkWorldBounds', true);
 	},
 
-	fire: function(game) {
-		this.penetration = 2;
+	playerFire: function(game) {
+		this.penetration = 1;
 	},
 
-	hit: function(game) {
+	enemyFire: function(game) {
+		this.penetration = 1;
+	},
+
+	hit: function(target, game) {
 		this.penetration--;
 		if (this.penetration == 0) {
 			console.log('kill bullet');
+
+			var explosion = game.ctx.explosions.getFirstExists(false);
+			// calculate explosion location
+			explosion.reset(target.body.x+target.width/2, target.body.y+target.height/2);
+			explosion.play('kaboom', 30, false, true);
 			this.kill();
 		}
 	}

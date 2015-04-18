@@ -4,9 +4,10 @@ module.exports = function create() {
 	// set physics engine to arcade
 	this.physics.startSystem(Phaser.Physics.ARCADE);
 
+
 	var ctx = this.ctx;
 
-	ctx.starfield = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, 'starfield');
+	ctx.background = this.add.tileSprite(0, 0, this.scale.width, this.scale.height, 'background');
 
 	ctx.playerBullets = this.add.group();
 	projectiles.initPlayer.bind(this)(ctx.playerBullets);
@@ -18,9 +19,9 @@ module.exports = function create() {
 	ctx.player = this.add.sprite(400, 500, 'ship')
 	require('./player').init.bind(this)(ctx.player)
 
-	// create aliens group
-	ctx.aliens = this.add.group()
-	require('./aliens').init.bind(this)(ctx.aliens)
+	// create enemies group
+	ctx.enemies = this.add.group()
+	require('./enemies').init.bind(this)(ctx.enemies)
 
 
 	// init ship lives
@@ -40,4 +41,13 @@ module.exports = function create() {
 	//  And some controls to play the game with
 	ctx.cursors = this.input.keyboard.createCursorKeys();
 	ctx.fireButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+
+	ctx.playing = false;
+
+	var stateText = ctx.stateText = this.add.text(this.world.centerX,this.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
+	stateText.anchor.setTo(0.5, 0.5);
+
+	ctx.player.lives = 3;
+	ctx.player.score = 0;
 }

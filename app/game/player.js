@@ -8,7 +8,7 @@ function firebullet(game) {
     {
         //  Grab the first bullet we can from the pool
         var bullet = this.playerBullets.getFirstExists(false);
-		projectiles.fire.bind(bullet)(game);
+		projectiles.playerFire.bind(bullet)(game);
 		var player = this.player;
 
         if (bullet)
@@ -52,9 +52,9 @@ module.exports = {
 	},
 
 	hit: function(game) {
-		console.log('ouch');
-		var explosion = game.ctx.explosions.getFirstExists(false);
-		explosion.reset(this.body.x, this.body.y);
-		explosion.play('kaboom', 30, false, true);
+		this.lives--;
+		if (this.lives == 0) {
+			this.kill();
+		}
 	}
 }
