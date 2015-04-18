@@ -1,0 +1,8 @@
+node_modules
+bower_components
+.yo-rc*
+*.swp
+*.un~
+.editorconfig
+.jshintrc
+build/

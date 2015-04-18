@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+
+  <link rel="stylesheet" href="app.css" />
+</head>
+
+<body>
+	
+	<div id="game_window"></div>
+
+	<h1>Hello world!</h1>
+
+	<p>This is my webdev seed!</p>
+	<h2>Some Features</h2>
+	<dl>
+		<dt>Browserify</dt>
+			<dd>Use commonjs and <code>Require</code> npm modules in your app for your browser!</dd>
+
+		<dt>Livereload</dt>
+			<dd>Make a change to any of the <code>./app</code> files and <code>livereload</code> will take care of the rest!</dd>
+			<dd>Any javascript file will trigger livereload, but only <code>index.html</code> and <code>app.css</code> will livereload. Use a build system to generate your app.css (like <code>sass</code> or <code>less</code>.</dd>
+
+		<dt>Front-end Framework / library agnostic</dt>
+			<dd>Does not care about what library you use.</dd>
+			<dd>Currently uses jquery as the only dependency, but you can remove it!</dd>
+			<dd>The convention is, front-end modules are <code>dependencies</code>, while back-end modules are <code>devDependencies</code></dd>
+	</dl>
+
+
+	<script src="bower_components/phaser/build/phaser.min.js"></script>
+	<script src="vendor.js"></script>
+	<script src="app.js"></script>
+
+  <!-- @if isDev==true -->
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+  <!-- @endif -->
+</body>
+</html>
