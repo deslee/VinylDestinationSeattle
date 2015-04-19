@@ -22,10 +22,12 @@ function firebullet(game) {
 module.exports = {
 	// put the player on the map
 	init: function(game) {
-		var player = this.player
-		player.revive()
+		var player = this.player = game.add.sprite(0, 0, 'player')
+		player.kill()
 		player.anchor.setTo(.5,.5)
 		game.physics.enable(player, Phaser.Physics.ARCADE)
+		player.checkWorldBounds = true
+		player.animations.add('move', [ 0, 1 ], 5, true);
 	},
 
 	// update game loop
@@ -40,12 +42,23 @@ module.exports = {
 
 		if (cursors.left.isDown) {
 			player.body.velocity.x = -200;
+			player.play('move')
 		}
 		else if (cursors.right.isDown) {
 			player.body.velocity.x = 200;
+			player.play('move')
+		}
+		else {
+			var animation = player.animations.currentAnim.stop();
 		}
 		if (this.fireButton.isDown) {
 			firebullet.bind(this)(game);
 		}
+		if ((player.body.x <= 0 && player.body.velocity.x < 0) || (player.body.x >= game.world.width - player.width && player.body.velocity.x > 0)) {
+			player.body.velocity.x = 0;
+		}
 	},
+	reset: function(game) {
+		this.player.reset(game.world.width/2, game.world.height-this.player.height/2);
+	}
 }

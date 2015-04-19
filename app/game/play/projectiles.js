@@ -18,9 +18,5 @@ module.exports = {
 	},
 
 	hit: function(target, game) {
-		this.penetration--;
-		if (this.penetration == 0) {
-			this.kill();
-		}
 	}
 }
