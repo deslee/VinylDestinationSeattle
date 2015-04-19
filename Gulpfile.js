@@ -155,3 +155,8 @@ gulp.task('default', function(cb) {
 	}
 });
 
+
+gulp.task('production', function(cb) {
+	build_options.isDev = false;
+	runSequence('main', cb);
+});
