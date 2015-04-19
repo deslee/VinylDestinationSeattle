@@ -1,7 +1,7 @@
 module.exports = {
 	preload: function() {
 		this.load.image('intro', 'assets/production/VDS_mainScreen.png');
-		this.load.audio('bgm', '/assets/production/NocturneofHipster.mp3');
+		this.load.audio('bgm', 'assets/production/NocturneofHipster.mp3');
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 		this.scale.refresh()
 	},
