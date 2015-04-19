@@ -1,6 +1,7 @@
 var projectiles = require('./projectiles');
 
 var firingTimer = 0;
+var ENEMY_BULLET_SPEED = 300
 
 function enemyFires(game) {
 	//  Grab the first bullet we can from the pool
@@ -10,7 +11,6 @@ function enemyFires(game) {
 	var player = this.player;
 
 	var livingEnemies = [];
-
 	enemies.forEachAlive(function(enemy){
 		// put every living enemy in an array
 		livingEnemies.push(enemy);
@@ -25,13 +25,14 @@ function enemyFires(game) {
 		// And fire the bullet from this enemy
 		enemyBullet.reset(shooter.body.x+shooter.body.width/2, shooter.body.y+shooter.body.height/2);
 
-		game.physics.arcade.moveToObject(enemyBullet,player,120);
+		game.physics.arcade.moveToObject(enemyBullet,player,ENEMY_BULLET_SPEED);
 		firingTimer = game.time.now + 2000;
 	}
 }
 
 module.exports = {
-	init: function (enemies) {
+	init: function (game) {
+		var enemies = this.enemies
 		enemies.enableBody = true
 		enemies.physicsBodyType = Phaser.Physics.ARCADE
 		for (var y = 0; y < 4; y++)
@@ -49,14 +50,14 @@ module.exports = {
 		enemies.x = 100;
 		enemies.y = 50;
 
-		var tween = enemies.tween = this.add.tween(enemies).to( { x: 200 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
+		var tween = enemies.tween = game.add.tween(enemies).to( { x: 200 }, 2000, Phaser.Easing.Linear.None, true, 0, 1000, true);
 
 		//  When the tween loops it calls descend
 		tween.onLoop.add(function() {
-			if (this.ctx.playing) {
+			if (this.playing) {
 				enemies.y += 10;
 			}
-		}, this);
+		}, game);
 	},
 
 	update: function(game) {
@@ -67,15 +68,4 @@ module.exports = {
 			enemyFires.bind(this)(game);
 		}
 	},
-
-	hit: function(game) {
-		// kill the enemy
-		game.ctx.player.score++;
-		this.kill();
-
-		//  And create an explosion :)
-		//var explosion = game.ctx.explosions.getFirstExists(false);
-		//explosion.reset(this.body.x, this.body.y);
-		//explosion.play('kaboom', 30, false, true);
-	}
 }
