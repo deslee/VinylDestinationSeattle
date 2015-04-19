@@ -1,4 +1,6 @@
 module.exports = function preload(game) {
+	game.load.audio('boom', '/assets/production/boom.wav');
+	game.load.audio('throw', '/assets/production/throw.mp3');
 	game.load.image('razor', 'assets/production/razor.png');
 	game.load.image('vinyl', 'assets/production/vinyl.png');
 	game.load.image('fedora', 'assets/production/fedoraProjectile.png');

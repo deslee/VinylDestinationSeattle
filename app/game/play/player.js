@@ -1,4 +1,6 @@
 var bulletTime = 0
+var bulletVelocity = 400
+var bulletDelay = 800
 
 var projectiles = require('./projectiles')
 
@@ -13,10 +15,12 @@ function firebullet(game) {
 		if (bullet) {
 			//  And fire it
 			bullet.reset(player.x, player.y + 8);
-			bullet.body.velocity.y = -400;
-			bulletTime = game.time.now + 200;
+			bullet.body.velocity.y = -bulletVelocity;
+			bulletTime = game.time.now + bulletDelay;
 		}
+		this.throw.play();
 	}
+
 }
 
 module.exports = {

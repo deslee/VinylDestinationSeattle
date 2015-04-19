@@ -4,6 +4,10 @@ module.exports = function create(game) {
 	// set physics engine to arcade
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
+
+	this.throw = game.add.audio('throw', 1);
+	this.boom = game.add.audio('boom', 1);
+
 	this.background = game.add.tileSprite(0, 0, game.world.width, game.world.height, 'background');
 	this.lines = game.add.tileSprite(game.world.width/2 - 50/2, 0, 50, game.world.height, 'lines');
 
@@ -29,6 +33,5 @@ module.exports = function create(game) {
 	//  And some controls to play the game with
 	this.cursors = game.input.keyboard.createCursorKeys();
 	this.fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-	console.log('bam')
 	this.startGame();
 }

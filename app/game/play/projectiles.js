@@ -10,7 +10,7 @@ module.exports = {
 	},
 
 	playerFire: function(game) {
-		this.penetration = 1;
+		this.penetration = 2;
 	},
 
 	enemyFire: function(game) {

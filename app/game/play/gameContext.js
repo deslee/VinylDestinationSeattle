@@ -24,9 +24,9 @@ module.exports = function(game) {
 			  	return
 			}
 			projectiles.hit.bind(bullet)(enemy, game);
-			console.log(enemy.hitpoints)
 			enemy.hitpoints -= bullet.penetration
-			bullet.penetration--
+			bullet.penetration--;
+			this.boom.play();
 				if (bullet.penetration < 0) {
 				bullet.kill()
 			}
@@ -43,7 +43,6 @@ module.exports = function(game) {
 		},
 
 		playerHit: function (player, bullet) {
-			console.log('hi')
 			projectiles.hit.bind(bullet)(player, game);
 			bullet.kill();
 			player.kill();
@@ -52,6 +51,7 @@ module.exports = function(game) {
 			// calculate explosion location
 			explosion.reset(player.body.x+player.width/2, player.body.y+player.height/2);
 			explosion.play('kaboom', 30, false, true);
+			this.boom.play();
 
 
 			if (this.lives > 0) {
@@ -80,6 +80,7 @@ module.exports = function(game) {
 			// calculate explosion location
 			explosion.reset(bullet1.body.x+bullet1.width/2, bullet1.body.y+bullet1.height/2);
 			explosion.play('kaboom', 30, false, true);
+			this.boom.play();
 			this.score++;
 		}
 	}

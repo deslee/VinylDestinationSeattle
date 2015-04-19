@@ -1,6 +1,7 @@
 module.exports = {
 	preload: function() {
 		this.load.image('intro', 'assets/production/VDS_mainScreen.png');
+		this.load.audio('bgm', '/assets/production/NocturneofHipster.mp3');
 		this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 		this.scale.refresh()
 	},
@@ -11,6 +12,8 @@ module.exports = {
 		stateText.visible = true;
 		stateText.text = "Space to start";
 		stateText.align = 'center'
+		var music = this.add.audio('bgm', 1, true);
+		music.play();
 	},
 	update: function() {
 		this.input.keyboard.onDownCallback = function(event) {
