@@ -4,7 +4,6 @@ module.exports = function create(game) {
 	// set physics engine to arcade
 	game.physics.startSystem(Phaser.Physics.ARCADE);
 
-
 	this.throw = game.add.audio('throw', 1);
 	this.boom = game.add.audio('boom', 1);
 
@@ -33,5 +32,12 @@ module.exports = function create(game) {
 	//  And some controls to play the game with
 	this.cursors = game.input.keyboard.createCursorKeys();
 	this.fireButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+	this.scoreText = game.add.text(0, 0, ' ', {font: '12px Arial', fill: '#fff'});
+	this.scoreText.visible = true;
+	this.livesText = game.add.text(0, 12, ' ', {font: '12px Arial', fill: '#fff'});
+	this.livesText.visible = true;
+
+
 	this.startGame();
 }

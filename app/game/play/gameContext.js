@@ -2,11 +2,13 @@ var enemies = require('./enemies');
 var playerImport = require('./player');
 var projectiles = require('./projectiles');
 
+var scoreText, livesText;
+
 module.exports = function(game) {
 	return {
 		startGame: function startGame() {
-			this.lives = 3;
-			this.score = 0;
+			this.updateScore(0);
+			this.updateLives(3);
 			playerImport.reset.bind(this)(game);
 			enemies.reset.bind(this)(game)
 		},
@@ -33,7 +35,7 @@ module.exports = function(game) {
 			if (enemy.hitpoints <= 0) {
 				enemy.kill();
 			}
-			this.score++;
+			this.updateScore(this.score + 1)
 
 			var explosion = this.explosions.getFirstExists(false);
 			// calculate explosion location
@@ -56,7 +58,7 @@ module.exports = function(game) {
 
 			if (this.lives > 0) {
 				setTimeout(function() {
-					this.lives--;
+					this.updateLives(this.lives - 1);
 					playerImport.reset.bind(this)(game);
 				}.bind(this), 1000);
 			}
@@ -81,7 +83,16 @@ module.exports = function(game) {
 			explosion.reset(bullet1.body.x+bullet1.width/2, bullet1.body.y+bullet1.height/2);
 			explosion.play('kaboom', 30, false, true);
 			this.boom.play();
-			this.score++;
-		}
+			this.updateScore(this.score + 1)
+		},
+
+		updateScore: function(score) {
+			this.scoreText.text = "Score: " + score;
+			this.score = score;
+		},
+		updateLives: function(lives) {
+			this.livesText.text = "Lives: " + lives;
+			this.lives = lives;
+		},
 	}
 }
